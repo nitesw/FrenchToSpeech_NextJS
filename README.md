@@ -29,7 +29,7 @@ npm run dev
 
 ### Usage
 
-1. Make sure the FastAPI backend is running (see `backend/README.md`).
+1. Make sure the FastAPI backend is running (see [`backend/README.md`](https://github.com/nitesw/FrenchToSpeech_FastAPI/blob/main/README.md)).
 2. Open your browser and navigate to `http://localhost:8000`.
 3. Enter the French phrase you want to practice.
 4. Select your device (`CUDA` for Nvidia GPUs on Windows/Linux, or `MPS` for Apple Silicon Macs).
