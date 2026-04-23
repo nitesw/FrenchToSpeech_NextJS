@@ -32,7 +32,7 @@ npm run dev
 1. Make sure the FastAPI backend is running (see `backend/README.md`).
 2. Open your browser and navigate to `http://localhost:8000`.
 3. Enter the French phrase you want to practice.
-4. Select your device (`MPS` is highly recommended if you are on a modern Mac).
+4. Select your device (`CUDA` for Nvidia GPUs on Windows/Linux, or `MPS` for Apple Silicon Macs).
 5. Click **Generate Pronunciation**.
 6. Listen, download, or manage your generations in the **Library** tab.
 

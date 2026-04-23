@@ -109,7 +109,7 @@ export default function GeneratorPage() {
 
             <div>
               <label className="mb-2 flex items-center gap-2 text-sm font-medium text-white/70">
-                {device === "mps" ? <Zap size={16} /> : <Cpu size={16} />}
+                {device === "mps" || device === "cuda" ? <Zap size={16} /> : <Cpu size={16} />}
                 Compute Device
               </label>
               <div className="flex h-12 rounded-xl border border-white/[0.1] bg-black/40 p-1">
@@ -132,8 +132,21 @@ export default function GeneratorPage() {
                       ? "bg-indigo-500/20 text-indigo-300 shadow-sm"
                       : "text-white/40 hover:text-white/70"
                   }`}
+                  title="Mac (Apple Silicon)"
                 >
                   MPS
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setDevice("cuda")}
+                  className={`flex-1 cursor-pointer rounded-lg text-sm font-medium transition-all ${
+                    device === "cuda"
+                      ? "bg-emerald-500/20 text-emerald-300 shadow-sm"
+                      : "text-white/40 hover:text-white/70"
+                  }`}
+                  title="Windows/Linux (Nvidia GPU)"
+                >
+                  CUDA
                 </button>
               </div>
             </div>
