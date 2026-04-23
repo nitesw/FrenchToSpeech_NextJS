@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Mic2, Settings2, Cpu, Zap, Loader2, Sparkles } from "lucide-react";
 import { generateAudio } from "@/lib/api";
 import { Audio } from "@/lib/types";
@@ -14,6 +14,16 @@ export default function GeneratorPage() {
   const [isGenerating, setIsGenerating] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [recentAudios, setRecentAudios] = useState<Audio[]>([]);
+  const [os, setOs] = useState<"mac" | "win" | "other">("other");
+
+  useEffect(() => {
+    const ua = window.navigator.userAgent.toLowerCase();
+    if (ua.indexOf("mac") !== -1) {
+      setOs("mac");
+    } else if (ua.indexOf("win") !== -1) {
+      setOs("win");
+    }
+  }, []);
 
   const handleGenerate = async () => {
     if (!text.trim()) return;
@@ -124,30 +134,34 @@ export default function GeneratorPage() {
                 >
                   CPU
                 </button>
-                <button
-                  type="button"
-                  onClick={() => setDevice("mps")}
-                  className={`flex-1 cursor-pointer rounded-lg text-sm font-medium transition-all ${
-                    device === "mps"
-                      ? "bg-indigo-500/20 text-indigo-300 shadow-sm"
-                      : "text-white/40 hover:text-white/70"
-                  }`}
-                  title="Mac (Apple Silicon)"
-                >
-                  MPS
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setDevice("cuda")}
-                  className={`flex-1 cursor-pointer rounded-lg text-sm font-medium transition-all ${
-                    device === "cuda"
-                      ? "bg-emerald-500/20 text-emerald-300 shadow-sm"
-                      : "text-white/40 hover:text-white/70"
-                  }`}
-                  title="Windows/Linux (Nvidia GPU)"
-                >
-                  CUDA
-                </button>
+                {os === "mac" && (
+                  <button
+                    type="button"
+                    onClick={() => setDevice("mps")}
+                    className={`flex-1 cursor-pointer rounded-lg text-sm font-medium transition-all ${
+                      device === "mps"
+                        ? "bg-indigo-500/20 text-indigo-300 shadow-sm"
+                        : "text-white/40 hover:text-white/70"
+                    }`}
+                    title="Mac (Apple Silicon)"
+                  >
+                    MPS
+                  </button>
+                )}
+                {os !== "mac" && (
+                  <button
+                    type="button"
+                    onClick={() => setDevice("cuda")}
+                    className={`flex-1 cursor-pointer rounded-lg text-sm font-medium transition-all ${
+                      device === "cuda"
+                        ? "bg-emerald-500/20 text-emerald-300 shadow-sm"
+                        : "text-white/40 hover:text-white/70"
+                    }`}
+                    title="Windows/Linux (Nvidia GPU)"
+                  >
+                    CUDA
+                  </button>
+                )}
               </div>
             </div>
           </div>
